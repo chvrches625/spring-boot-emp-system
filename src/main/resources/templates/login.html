@@ -15,23 +15,44 @@
 	<body class="text-center">
 		<!--点击登录，action指定跳转页面-->
 		<form class="form-signin" action="dashboard.html" th:action="@{/user/login}" method="post">
+
 			<!--图标B-->
 			<img class="mb-4" th:src="@{/asserts/img/bootstrap-solid.svg}" src="asserts/img/bootstrap-solid.svg" alt="" width="72" height="72">
-			<!--显示login.tip=请登录-->
+
+			<!--显示login.tip=请登录
+				#{} 是从login.properties 中取值
+				专门为了国际化显示设置
+			-->
 			<h1 class="h3 mb-3 font-weight-normal" th:text="#{login.tip}">Please sign in</h1>
-			<!--如果-->
+
+			<!--显示提示语
+				thymeleaf语法
+				通过${} 取值 }-->
 			<p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
+
+			<!--用户名-->
 			<label class="sr-only" th:text="#{login.username}">Username</label>
 			<input type="text" name="username" class="form-control" placeholder="Username" th:placeholder="#{login.username}" required="" autofocus="">
+
+			<!--密码-->
 			<label class="sr-only" th:text="#{login.password}">Password</label>
 			<input type="password" name="password" class="form-control" placeholder="Password" th:placeholder="#{login.password}" required="">
+
+			<!--勾选框，remember-me-->
 			<div class="checkbox mb-3">
 				<label>
-          <input type="checkbox" value="remember-me">[[#{login.remember}]]
-        </label>
+          			<input type="checkbox" value="remember-me">[[#{login.remember}]]
+        		</label>
 			</div>
+
+			<!--登录按钮-->
 			<button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{login.btn}">Sign in</button>
-			<p class="mt-5 mb-3 text-muted">© 2017-2018</p>
+
+			<p class="mt-5 mb-3 text-muted">© 2020-2021</p>
+
+			<!--这边传入的l是和MyLocaleResolver中相关的
+				这边的l作为字符串传入到MyLocaleResolver中，根据_分割为两部分
+			-->
 			<a class="btn btn-sm" th:href="@{/index.html(l='zh_CN')}">中文</a>
 			<a class="btn btn-sm" th:href="@{/index.html(l='en_US')}">English</a>
 		</form>

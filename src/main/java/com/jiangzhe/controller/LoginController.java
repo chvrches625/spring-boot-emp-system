@@ -19,7 +19,9 @@ public class LoginController {
                         @RequestParam("password") String password,
                         Map<String,Object> map, HttpSession session){
         if (!StringUtils.isEmpty(username) && "123".equals(password)){
+            //设置登录用户，传入username
             session.setAttribute("loginUser", username);
+            //跳转到main页面，被视图解析器改成跳转到dashboard页面了
             return "redirect:/main.html";
         }else {
             map.put("msg","用户名或密码错误");
